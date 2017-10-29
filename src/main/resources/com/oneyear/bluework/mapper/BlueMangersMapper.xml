@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oneyear.bluework.dao.BlueMangersMapper" >
+  <resultMap id="BaseResultMap" type="com.oneyear.bluework.model.BlueMangers" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="INTEGER" />
+    <result column="LEVEL" property="level" jdbcType="INTEGER" />
+    <result column="BOSS" property="boss" jdbcType="VARCHAR" />
+    <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="WECHAT" property="wechat" jdbcType="VARCHAR" />
+    <result column="AVATAR" property="avatar" jdbcType="VARCHAR" />
+     <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+      <collection property="roles" ofType="com.oneyear.bluework.model.Role">
+            <result column="role_name" property="name"/>
+        </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME, SEX, LEVEL, BOSS, MOBILE_PHONE, PHONE, QQ, WECHAT, AVATAR, PASSWORD
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    	u.ID, u.NAME, u.SEX, u.LEVEL, u.BOSS, u.MOBILE_PHONE, u.PHONE, u.QQ, u.WECHAT, u.AVATAR, u.PASSWORD, r.NAME role_name 
+    from blue_mangers u 
+    LEFT JOIN role_manger sru on u.ID = sru.MANGER_ID
+    LEFT JOIN role r on sru.ROLE_ID = r.ID
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+   		u.ID, u.NAME, u.SEX, u.LEVEL, u.BOSS, u.MOBILE_PHONE, u.PHONE, u.QQ, u.WECHAT, u.AVATAR, u.PASSWORD, r.NAME role_name 
+    from blue_mangers  u 
+    LEFT JOIN role_manger sru on u.ID = sru.MANGER_ID
+    LEFT JOIN role r on sru.ROLE_ID = r.ID 
+    where u.NAME = #{name,jdbcType=VARCHAR}
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from blue_mangers
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.oneyear.bluework.model.BlueMangers" >
+    insert into blue_mangers (ID, NAME, SEX, 
+      LEVEL, BOSS, MOBILE_PHONE, 
+      PHONE, QQ, WECHAT, 
+      AVATAR, PASSWORD)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{boss,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oneyear.bluework.model.BlueMangers" >
+    insert into blue_mangers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="boss != null" >
+        BOSS,
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="wechat != null" >
+        WECHAT,
+      </if>
+      <if test="avatar != null" >
+        AVATAR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="boss != null" >
+        #{boss,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oneyear.bluework.model.BlueMangers" >
+    update blue_mangers
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        LEVEL = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="boss != null" >
+        BOSS = #{boss,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        WECHAT = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        AVATAR = #{avatar,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oneyear.bluework.model.BlueMangers" >
+    update blue_mangers
+    set NAME = #{name,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=INTEGER},
+      LEVEL = #{level,jdbcType=INTEGER},
+      BOSS = #{boss,jdbcType=VARCHAR},
+      MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      WECHAT = #{wechat,jdbcType=VARCHAR},
+      AVATAR = #{avatar,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

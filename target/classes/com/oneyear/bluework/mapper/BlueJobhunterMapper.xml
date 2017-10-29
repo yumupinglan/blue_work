@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oneyear.bluework.dao.BlueJobhunterMapper" >
+  <resultMap id="BaseResultMap" type="com.oneyear.bluework.model.BlueJobhunter" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="INTEGER" />
+    <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="WECHAT" property="wechat" jdbcType="VARCHAR" />
+    <result column="AVATAR" property="avatar" jdbcType="VARCHAR" />
+    <result column="MANGER" property="manger" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME, SEX, MOBILE_PHONE, PHONE, QQ, WECHAT, AVATAR, MANGER, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from blue_jobhunter
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from blue_jobhunter
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.oneyear.bluework.model.BlueJobhunter" >
+    insert into blue_jobhunter (ID, NAME, SEX, 
+      MOBILE_PHONE, PHONE, QQ, 
+      WECHAT, AVATAR, MANGER, 
+      STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{mobilePhone,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{wechat,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{manger,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oneyear.bluework.model.BlueJobhunter" >
+    insert into blue_jobhunter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="wechat != null" >
+        WECHAT,
+      </if>
+      <if test="avatar != null" >
+        AVATAR,
+      </if>
+      <if test="manger != null" >
+        MANGER,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="manger != null" >
+        #{manger,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oneyear.bluework.model.BlueJobhunter" >
+    update blue_jobhunter
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        WECHAT = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        AVATAR = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="manger != null" >
+        MANGER = #{manger,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oneyear.bluework.model.BlueJobhunter" >
+    update blue_jobhunter
+    set NAME = #{name,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=INTEGER},
+      MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      WECHAT = #{wechat,jdbcType=VARCHAR},
+      AVATAR = #{avatar,jdbcType=VARCHAR},
+      MANGER = #{manger,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
